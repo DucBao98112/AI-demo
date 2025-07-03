@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxSecond - ログイン</title>
+    <base target="_self">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@preline/preline@2.0.0/dist/preline.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#f59e0b',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="Untitled-1.html" class="flex items-center space-x-2" id="logo-link">
+                    <i class="fas fa-crown text-2xl text-secondary"></i>
+                    <span class="text-xl font-bold">LuxSecond</span>
+                </a>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="Untitled-1.html" class="nav-link font-medium hover:text-primary transition">ホームページ </a>
+                    <a href="Untitled-1.html#products" class="nav-link font-medium hover:text-primary transition">商品</a>
+                    <a href="Untitled-1.html#about" class="nav-link font-medium hover:text-primary transition">私たちについて</a>
+                    <a href="Untitled-1.html#contact" class="nav-link font-medium hover:text-primary transition">お問い合わせ</a>
+                </nav>
+
+                <!-- User actions -->
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" id="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" id="user-link">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button class="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+                        id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col space-y-3 mt-3">
+                    <a href="Untitled-1.html" class="nav-link font-medium hover:text-primary transition">ホームページ</a>
+                    <a href="Untitled-1.html#products" class="nav-link font-medium hover:text-primary transition">商品</a>
+                    <a href="Untitled-1.html#about" class="nav-link font-medium hover:text-primary transition">私たちについて</a>
+                    <a href="Untitled-1.html#contact" class="nav-link font-medium hover:text-primary transition">お問い合わせ</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 fade-in">
+                <h2 class="text-3xl font-bold text-center mb-8">ログイン</h2>
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label for="email" class="block mb-2 font-medium">Email</label>
+                        <input type="email" id="email"
+                            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary dark:bg-gray-700">
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-2 font-medium">パスワード</label>
+                        <input type="password" id="password"
+                            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary dark:bg-gray-700">
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-sm text-primary hover:underline">パスワードを忘れましたか？</a>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-opacity-90 transition">ログイン</button>
+                </form>
+                <p class="text-center mt-6">
+                    アカウントをお持ちではありませんか？ <a href="#" class="text-primary hover:underline">新規登録</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">LuxSecond</h3>
+                    <p class="mb-4">住所 : 〒760-0011 香川県高松市浜ノ町 １−２０</p>
+                    <p class="mb-4">Email: info@luxsecond.com</p>
+                    <p>電話番号: 0901 234 567</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">目録</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Untitled-1.html#products" class="hover:text-primary transition">男性</a></li>
+                        <li><a href="Untitled-1.html#products" class="hover:text-primary transition">女性</a></li>
+                        <li><a href="Untitled-1.html#products" class="hover:text-primary transition"> アクセサリー </a></li>
+                        <li><a href="Untitled-1.html#products" class="hover:text-primary transition">値下げ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">情報</h4>
+                    <ul class="space-y-2">
+                        <li><a href="Untitled-1.html#about" class="hover:text-primary transition">私たちについて</a></li>
+                        <li><a href="#" class="hover:text-primary transition">プライバシーポリシー</a></li>
+                        <li><a href="#" class="hover:text-primary transition"> ご利用規約</a></li>
+                        <li><a href="#" class="hover:text-primary transition">よくあるお問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">私たちをフォローする</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                    <p>ニュースレターを購読する:</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="あなたのメール"
+                            class="px-4 py-2 rounded-l-lg bg-gray-700 text-white w-full focus:outline-none">
+                        <button class="bg-primary px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 LuxSecond. すべての権利を保留します。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM elements
+        const themeToggle = document.getElementById('theme-toggle');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Check theme preference
+        function checkThemePreference() {
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set up event listeners
+            setupEventListeners();
+
+            // Check for saved theme preference
+            checkThemePreference();
+        });
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Theme toggle
+            themeToggle.addEventListener('click', toggleTheme);
+
+            // Mobile menu toggle
+            menuToggle.addEventListener('click', toggleMobileMenu);
+        }
+    </script>
+</body>
+
+</html>

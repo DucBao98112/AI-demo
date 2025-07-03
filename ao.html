@@ -1,0 +1,850 @@
+
+<!DOCTYPE html>
+<html lang="ja-JP">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品の詳細| LuxSecond</title>
+    <base target="_self">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@preline/preline@2.0.0/dist/preline.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#f59e0b',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .product-gallery-image {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .product-gallery-image:hover {
+            transform: scale(1.03);
+        }
+        .selected-image {
+            border: 2px solid #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <!-- Header (giống trang chủ) -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2" id="logo-link">
+                    <i class="fas fa-crown text-2xl text-secondary"></i>
+                    <span class="text-xl font-bold">LuxSecond</span>
+                </a>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link font-medium hover:text-primary transition">ホームページ</a>
+                    <a href="index.html#products" class="nav-link font-medium hover:text-primary transition">商品</a>
+                    <a href="index.html#about" class="nav-link font-medium hover:text-primary transition">私たちについて</a>
+                    <a href="index.html#contact" class="nav-link font-medium hover:text-primary transition">お問い合わせ</a>
+                </nav>
+                
+                <!-- User actions -->
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" id="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" id="user-link">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button class="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col space-y-3 mt-3">
+                    <a href="index.html" class="nav-link font-medium hover:text-primary transition">ホームページ </a>
+                    <a href="index.html#products" class="nav-link font-medium hover:text-primary transition">商品</a>
+                    <a href="index.html#about" class="nav-link font-medium hover:text-primary transition">私たちについて</a>
+                    <a href="index.html#contact" class="nav-link font-medium hover:text-primary transition">お問い合わせ</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="container mx-auto px-4 py-4 text-sm text-gray-600 dark:text-gray-400">
+        <div class="flex items-center space-x-2">
+            <a href="index.html" class="hover:text-primary transition">ホームページ </a>
+            <span>/</span>
+            <a href="index.html#products" class="hover:text-primary transition">商品</a>
+            <span>/</span>
+            <span class="text-gray-900 dark:text-gray-300">バーバリーのコート</span>
+        </div>
+    </div>
+
+    <!-- Product Detail Section -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Product Images -->
+                <div class="lg:w-1/2">
+                    <div class="mb-4 rounded-lg overflow-hidden">
+                        <img id="main-image" src="a1.avif" 
+                             alt="ラルフローレンのシャツ" 
+                             class="w-full h-auto object-cover rounded-lg">
+                    </div>
+                    <div class="grid grid-cols-4 gap-3">
+                        <img src="a1.avif" 
+                             alt="ラルフローレンのシャツ" 
+                             class="product-gallery-image h-24 w-full object-cover rounded-lg cursor-pointer selected-image"
+                             data-main="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80">
+                        <img src="a2.avif" 
+                             alt="ラルフローレンのシャツ" 
+                             class="product-gallery-image h-24 w-full object-cover rounded-lg cursor-pointer"
+                             data-main="https://images.unsplash.com/photo-1591047139830-8b63e0df2388?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80">
+                        <img src="a3.avif" 
+                             alt="ラルフローレンのシャツ" 
+                             class="product-gallery-image h-24 w-full object-cover rounded-lg cursor-pointer"
+                             data-main="https://images.unsplash.com/photo-1591047139843-9dc007014125?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80">
+                        <img src="a4.avif" 
+                             alt="ラルフローレンのシャツ" 
+                             class="product-gallery-image h-24 w-full object-cover rounded-lg cursor-pointer"
+                             data-main="https://images.unsplash.com/photo-1591047139859-4a9d02a1e3ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80">
+                    </div>
+                </div>
+                
+                <!-- Product Info -->
+                <div class="lg:w-1/2">
+                    <h1 class="text-3xl font-bold mb-2">ラルフローレンのシャツ</h1>
+                    <div class="flex items-center mb-4">
+                        <div class="flex mr-4">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star-half-alt text-yellow-400"></i>
+                        </div>
+                        <span class="text-gray-600 dark:text-gray-400">（12件のレビュー）</span>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <span class="text-primary font-bold text-2xl">120,000円</span>
+                        <span class="text-gray-400 line-through ml-2">250,000円</span>
+                        <span class="ml-2 bg-red-100 text-red-800 text-sm font-medium px-2 py-0.5 rounded">-44%</span>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-bold mb-2">状態：</h3>
+                        <div class="flex items-center">
+                            <span class="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                            <span> 90% 新し -ほぼ新品 </span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-bold mb-2">商品説明：</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            こちらはバーバリーの正規品コートです。
+イギリスから輸入されたもので、タグや購入時のレシートなど付属品もすべて揃っています。中古品ではありますが、使用感がほとんどなく、状態は90％新品に近いです。
+高級生地を使用しており、シワになりにくく、毛玉や型崩れもしません。シルエットは美しく、さまざまなファッションスタイルに合わせやすいデザインです。
+                        </p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-bold mb-2">製品仕様：</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <span class="text-gray-600 dark:text-gray-400">ブランド：</span>
+                                <span class="font-medium">ラルフローレンのシャツ</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-600 dark:text-gray-400">原産国：</span>
+                                <span class="font-medium">イギリス</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-600 dark:text-gray-400">素材：</span>
+                                <span class="font-medium">Cotton 100%</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-600 dark:text-gray-400">色：</span>
+                                <span class="font-medium">ベージュ</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-600 dark:text-gray-400">サイズ：</span>
+                                <span class="font-medium">M（身長165cm〜175cmに適しています）</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-600 dark:text-gray-400">状態</span>
+                                <span class="font-medium">90% 新し</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-bold mb-2">サイズ：</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:border-primary hover:text-primary transition">S</button>
+                            <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-primary text-white border-primary">M</button>
+                            <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:border-primary hover:text-primary transition">L</button>
+                            <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:border-primary hover:text-primary transition">XL</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-bold mb-2">数量：</h3>
+                        <div class="flex items-center">
+                            <button id="decrease-qty" class="w-10 h-10 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-l-lg hover:bg-gray-100 dark:hover:bg-gray-700">-</button>
+                            <input type="number" id="quantity" value="1" min="1" class="w-16 h-10 text-center border-t border-b border-gray-300 dark:border-gray-600 dark:bg-gray-800">
+                            <button id="increase-qty" class="w-10 h-10 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-r-lg hover:bg-gray-100 dark:hover:bg-gray-700">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <button id="add-to-cart" class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-opacity-90 transition flex items-center justify-center">
+                            <i class="fas fa-shopping-cart mr-2"></i> カートに追加
+                        </button>
+                        <button id="buy-now" class="flex-1 bg-secondary text-white py-3 px-6 rounded-lg font-medium hover:bg-opacity-90 transition">
+                           今すぐ購入
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6 flex items-center text-gray-600 dark:text-gray-400">
+                        <i class="fas fa-shield-alt mr-2"></i>
+                        <span>商品説明と異なる場合、7日間の返品・交換保証があります。</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Tabs -->
+    <section class="py-12 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex border-b border-gray-300 dark:border-gray-700">
+                    <button class="tab-btn py-3 px-6 font-medium border-b-2 border-primary text-primary" data-tab="description">商品説明</button>
+                    
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-b-lg">
+                    <div id="description" class="tab-content">
+                        <h3 class="font-bold text-xl mb-4">商品の詳細</h3>
+                        <p class="mb-4">バーバリーの正規品ジャケットで、クラシックなデザインが特徴です。オフィスからカジュアルな街歩きまで、さまざまなスタイルに合わせやすいアイテムです。
+高品質なコットン素材を使用しており、柔らかく通気性が良く、シワになりにくいです。</p>
+                        <p class="mb-4">こちらのジャケットは、ゆったりとしたオーバーサイズのシルエットで、長袖、スタンドカラーが特徴です。丁寧に仕立てられたディテールが魅力です。
+ボタンは高品質な素材で作られており、バーバリーの象徴的なロゴが刻印されています。</p>
+                        <p class="mb-4">本商品は厳格な品質検査をクリアしており、販売前に専門的なクリーニングが施されています。汚れやシミ、嫌な臭いは一切ありません。</p>
+                        
+                        <h3 class="font-bold text-xl mb-4 mt-8">お手入れ方法</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>ドライクリーニングまたは冷水で手洗いしてください。</li>
+                            <li>強い洗剤は使用しないでください。</li>
+                            <li>日陰で干し、直射日光を避けてください。</li>
+                            <li>低温でアイロンをかけてください</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="specs" class="tab-content hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-bold mb-2">一般情報</h4>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between border-b border-gray-200 dark:border-gray-600 py-2">
+                                        <span class="text-gray-600 dark:text-gray-400">ブランド</span>
+                                        <span>Burberry</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-200 dark:border-gray-600 py-2">
+                                        <span class="text-gray-600 dark:text-gray-400">原産国</span>
+                                        <span>イギリス</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-200 dark:border-gray-600 py-2">
+                                        <span class="text-gray-600 dark:text-gray-400">製造年</span>
+                                        <span>2021</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-200 dark:border-gray-600 py-2">
+                                        <span class="text-gray-600 dark:text-gray-400">状態</span>
+                                        <span>90% 新し</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-bold mb-2">仕様</h4>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between border-b border-gray-200 dark:border-gray-600 py-2">
+                                        <span class="text-gray-600 dark:text-gray-400">素材</span>
+                                        <span>Cotton 100%</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-200 dark:border-gray-600 py-2">
+                                        <span class="text-gray-600 dark:text-gray-400">色</span>
+                                        <span>Beige</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-200 dark:border-gray-600 py-2">
+                                        <span class="text-gray-600 dark:text-gray-400">サイズ：</span>
+                                        <span>M（身長165cm〜175cmに適しています）</span>
+                                    </div>
+                                    <div class="flex justify-between border-b border-gray-200 dark:border-gray-600 py-2">
+                                        <span class="text-gray-600 dark:text-gray-400">重量</span>
+                                        <span>0.8kg</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="reviews" class="tab-content hidden">
+                        <h3 class="font-bold text-xl mb-6">商品レビュー（12件）</h3>
+                        
+                        <div class="space-y-6">
+                            <!-- Review 1 -->
+                            <div class="border-b border-gray-200 dark:border-gray-600 pb-6">
+                                <div class="flex items-center mb-2">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="山本さん" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-medium">山本さん</h4>
+                                        <div class="flex items-center">
+                                            <div class="flex mr-2">
+                                                <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                                <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                                <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                                <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                                <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                            </div>
+                                            <span class="text-gray-500 text-sm">2日前</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 dark:text-gray-300">きれいな服で、品質も良く、説明通りでした。サイズもぴったりで、生地はしっかりしています。ショップの発送も早く、梱包も丁寧でした。これからも応援します！</p>
+                            </div>
+                            
+                            <!-- Review 2 -->
+                            <div class="border-b border-gray-200 dark:border-gray-600 pb-6">
+                                <div class="flex items-center mb-2">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="真田様さん" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-medium">真田様さん</h4>
+                                        <div class="flex items-center">
+                                            <div class="flex mr-2">
+                                                <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                                <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                                <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                                <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                                <i class="fas fa-star-half-alt text-yellow-400 text-sm"></i>
+                                            </div>
+                                            <span class="text-gray-500 text-sm">1週間前</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 dark:text-gray-300">きれいな服で、サイズもぴったりでした。私は身長172cm、体重65kgで、サイズMがちょうど良かったです。生地は良質で、変な匂いもありません。唯一の小さな欠点はボタンが少し緩いことですが、あまり問題ありません。</p>
+                            </div>
+                            
+                            <!-- Review Form -->
+                            <div class="mt-8">
+                                <h4 class="font-bold text-lg mb-4">あなたのレビューを書く</h4>
+                                <form id="review-form">
+                                    <div class="mb-4">
+                                        <label class="block mb-2">あなたのれびゅー</label>
+                                        <div class="flex space-x-1" id="rating-stars">
+                                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="1"></i>
+                                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="2"></i>
+                                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="3"></i>
+                                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="4"></i>
+                                            <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-yellow-400" data-rating="5"></i>
+                                        </div>
+                                        <input type="hidden" id="rating" value="0">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="review-name" class="block mb-2">名前</label>
+                                        <input type="text" id="review-name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary dark:bg-gray-800">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="review-text" class="block mb-2">レビュー内容</label>
+                                        <textarea id="review-text" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary dark:bg-gray-800"></textarea>
+                                    </div>
+                                    <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-opacity-90 transition">レビューを送信する</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8">類似商品</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="product-card bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="Gucci バッグ" 
+                             class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-1 rounded">-46%</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">グッチのハンドバッグ</h3>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="text-gray-500 text-sm ml-2">95% 新し</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-primary font-bold text-lg">600000円</span>
+                                <span class="text-gray-400 line-through text-sm ml-2">120000円</span>
+                            </div>
+                            <button class="add-to-cart bg-gray-200 dark:bg-gray-600 hover:bg-primary hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="dior.avif" 
+                             alt="ディオールのワンピース" 
+                             class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-1 rounded">-39%</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">ディオールのワンピース</h3>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star-half-alt text-yellow-400"></i>
+                            <span class="text-gray-500 text-sm ml-2">92% 新し</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-primary font-bold text-lg">5500000円</span>
+                                <span class="text-gray-400 line-through text-sm ml-2">9000000円</span>
+                            </div>
+                            <button class="add-to-cart bg-gray-200 dark:bg-gray-600 hover:bg-primary hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="ロレックスの時計" 
+                             class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-1 rounded">-52%</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">ロレックスの時計</h3>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="text-gray-500 text-sm ml-2">88% 新し</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-primary font-bold text-lg">12000000円</span>
+                                <span class="text-gray-400 line-through text-sm ml-2">25000000円</span>
+                            </div>
+                            <button class="add-to-cart bg-gray-200 dark:bg-gray-600 hover:bg-primary hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="a.webp" 
+                             alt="ジミー・チュウのハイヒール" 
+                             class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-1 rounded">-47%</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">ジミー・チュウのハイヒール</h3>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="far fa-star text-yellow-400"></i>
+                            <span class="text-gray-500 text-sm ml-2">87% 新し</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-primary font-bold text-lg">3200000円</span>
+                                <span class="text-gray-400 line-through text-sm ml-2">6000000円</span>
+                            </div>
+                            <button class="add-to-cart bg-gray-200 dark:bg-gray-600 hover:bg-primary hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (giống trang chủ) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">LuxSecond</h3>
+                    <p class="mb-4">住所 : 〒760-0011 香川県高松市浜ノ町 １−２０</p>
+                    <p class="mb-4">Email: info@luxsecond.com</p>
+                    <p>電話番号: 0901 234 567</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">目録</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#products" class="hover:text-primary transition">男性</a></li>
+                        <li><a href="index.html#products" class="hover:text-primary transition">女性</a></li>
+                        <li><a href="index.html#products" class="hover:text-primary transition">アクセサリー </a></li>
+                        <li><a href="index.html#products" class="hover:text-primary transition">値下げ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Thông tin</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#about" class="hover:text-primary transition">私たちについて</a></li>
+                        <li><a href="#" class="hover:text-primary transition">プライバシーポリシー</a></li>
+                        <li><a href="#" class="hover:text-primary transition">ご利用規約</a></li>
+                        <li><a href="#" class="hover:text-primary transition">よくあるお問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">私たちをフォローする</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                    <p>ニュースレター登録：</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="あなたのメールアドレス" class="px-4 py-2 rounded-l-lg bg-gray-700 text-white w-full focus:outline-none">
+                        <button class="bg-primary px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 LuxSecond. すべての権利を保留します。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar (giống trang chủ) -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-white dark:bg-gray-800 shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">お買い物カゴ</h3>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex-grow overflow-y-auto mb-4">
+                <div id="cart-items" class="space-y-4">
+                    <!-- Cart items will be added here -->
+                </div>
+            </div>
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                <div class="flex justify-between mb-4">
+                    <span>小計</span>
+                    <span id="cart-total" class="font-bold">0円</span>
+                </div>
+                <a href="#" class="block w-full bg-primary text-white py-3 rounded-lg text-center font-medium hover:bg-opacity-90 transition" id="checkout-btn">お支払い</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Product data
+        const currentProduct = {
+            id: 1,
+            name: "バーバリーのコート",
+            price: 4500000,
+            originalPrice: 8000000,
+            image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80",
+            condition: "90% 新し",
+            rating: 4.5
+        };
+
+        // Shopping cart
+        let cart = [];
+
+        // DOM elements
+        const themeToggle = document.getElementById('theme-toggle');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCart = document.getElementById('close-cart');
+        const cartLink = document.getElementById('cart-link');
+        const addToCartBtn = document.getElementById('add-to-cart');
+        const buyNowBtn = document.getElementById('buy-now');
+        const decreaseQty = document.getElementById('decrease-qty');
+        const increaseQty = document.getElementById('increase-qty');
+        const quantityInput = document.getElementById('quantity');
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const galleryImages = document.querySelectorAll('.product-gallery-image');
+        const mainImage = document.getElementById('main-image');
+        const ratingStars = document.querySelectorAll('#rating-stars i');
+        const ratingInput = document.getElementById('rating');
+        const reviewForm = document.getElementById('review-form');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Check for saved theme preference
+            checkThemePreference();
+        });
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Theme toggle
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            // Mobile menu toggle
+            menuToggle.addEventListener('click', toggleMobileMenu);
+            
+            // Cart toggle
+            cartLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleCartSidebar();
+            });
+            
+            // Close cart
+            closeCart.addEventListener('click', toggleCartSidebar);
+            
+            // Add to cart button
+            addToCartBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                addToCart(currentProduct.id, parseInt(quantityInput.value));
+                showNotification('商品がカートに追加されました。');
+            });
+            
+            // Buy now button
+            buyNowBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                addToCart(currentProduct.id, parseInt(quantityInput.value));
+                showNotification('商品がカートに追加されました。');
+                toggleCartSidebar();
+            });
+            
+            // Quantity buttons
+            decreaseQty.addEventListener('click', function() {
+                if (parseInt(quantityInput.value) > 1) {
+                    quantityInput.value = parseInt(quantityInput.value) - 1;
+                }
+            });
+            
+            increaseQty.addEventListener('click', function() {
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+            });
+            
+            // Tab buttons
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active tab button
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('border-primary', 'text-primary');
+                        btn.classList.add('text-gray-600', 'dark:text-gray-400');
+                    });
+                    this.classList.add('border-primary', 'text-primary');
+                    this.classList.remove('text-gray-600', 'dark:text-gray-400');
+                    
+                    // Show selected tab content
+                    tabContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+            
+            // Gallery image click
+            galleryImages.forEach(image => {
+                image.addEventListener('click', function() {
+                    // Update main image
+                    mainImage.src = this.getAttribute('data-main');
+                    
+                    // Update selected image
+                    galleryImages.forEach(img => {
+                        img.classList.remove('selected-image');
+                    });
+                    this.classList.add('selected-image');
+                });
+            });
+            
+            // Rating stars
+            ratingStars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    ratingInput.value = rating;
+                    
+                    // Update stars display
+                    ratingStars.forEach((s, index) => {
+                        if (index < rating) {
+                            s.classList.remove('far');
+                            s.classList.add('fas');
+                        } else {
+                            s.classList.remove('fas');
+                            s.classList.add('far');
+                        }
+                    });
+                });
+                
+                // Hover effect
+                star.addEventListener('mouseover', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    
+                    ratingStars.forEach((s, index) => {
+                        if (index < rating) {
+                            s.classList.add('text-yellow-400');
+                        } else {
+                            s.classList.remove('text-yellow-400');
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    const currentRating = parseInt(ratingInput.value);
+                    
+                    ratingStars.forEach((s, index) => {
+                        if (index >= currentRating) {
+                            s.classList.remove('text-yellow-400');
+                        }
+                    });
+                });
+            });
+            
+            // Review form submission
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('review-name').value;
+                const text = document.getElementById('review-text').value;
+                const rating = ratingInput.value;
+                
+                if (name && text && rating > 0) {
+                    showNotification('商品レビューをいただき、ありがとうございます！');
+                    this.reset();
+                    
+                    // Reset stars
+                    ratingStars.forEach(star => {
+                        star.classList.remove('fas');
+                        star.classList.add('far');
+                    });
+                    ratingInput.value = 0;
+                } else {
+                    showNotification('必要な情報をすべて入力し、評価の星を選んでください。');
+                }
+            });
+            
+            // Add to cart buttons for related products
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // In a real app, you would get the product ID from a data attribute
+                    showNotification('商品がカートに追加されました。');
+                });
+            });
+        }
+
+        // Add to cart
+        function addToCart(productId, quantity = 1) {
+            // In a real app, you would find the product by ID from your products array
+            const product = currentProduct;
+            
+            if (product) {
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: quantity
+                    });
+                }
+                
+                updateCart();
+            }
+        }
+
+        // Update cart
+        function updateCart() {
+            // Update cart items
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div class="flex items-center border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4">
+                    <div class="flex-grow">
+                        <h4 class="font-medium">${item.name}</h4>
+                        <p class="text-primary font-medium">${formatPrice(item.price)}</p>
+                    </div>
+                    <div class="flex items-center">
+                        <button class="quantity-btn px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded" data-id="${item.id}" data-action="decrease">-</button>
+                        <span class="mx-2">${item.quantity}</span>
+                        <button class="quantity-btn px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded" data-id="${item.id}" data-action="increase">+</button>
+                        <button class="remove-btn ml-4 text-red-500" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
