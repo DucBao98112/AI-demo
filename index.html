@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxSecond - 高品質な中古ブランドファッション</title>
+    <base target="_self">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@preline/preline@2.0.0/dist/preline.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#f59e0b',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-2" id="logo-link">
+                    <i class="fas fa-crown text-2xl text-secondary"></i>
+                    <span class="text-xl font-bold">LuxSecond</span>
+                </a>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link font-medium hover:text-primary transition">ホームページ </a>
+                    <a href="#products" class="nav-link font-medium hover:text-primary transition">商品</a>
+                    <a href="#about" class="nav-link font-medium hover:text-primary transition">私たちについて</a>
+                    <a href="#contact" class="nav-link font-medium hover:text-primary transition">お問い合わせ</a>
+                </nav>
+
+                <!-- User actions -->
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    <a href="#" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" id="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <a href="login.html" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700" id="user-link">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button class="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+                        id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col space-y-3 mt-3">
+                    <a href="#" class="nav-link font-medium hover:text-primary transition">ホームページ</a>
+                    <a href="#products" class="nav-link font-medium hover:text-primary transition">商品</a>
+                    <a href="#about" class="nav-link font-medium hover:text-primary transition">私たちについて</a>
+                    <a href="#contact" class="nav-link font-medium hover:text-primary transition">お問い合わせ</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-primary to-secondary text-white py-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 fade-in">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4"> 高品質な中古ブランドファッション</h1>
+                <p class="text-xl mb-8">PreLuxuryでは、専門チームによる厳格な鑑定のもと、本物だけをお届けします。ほぼ新品の状態で、安心して選べる〈中古ブランド〉体験を。</p>
+                <div class="flex space-x-4">
+                    <a href="#products"
+                        class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition"
+                        id="shop-now">今すぐ買う</a>
+                    <a href="#about"
+                        class="border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:bg-opacity-20 transition"
+                        id="learn-more">もっと詳しく知る</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center fade-in">
+                <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                    alt="中古ブランドファッション " class="rounded-lg shadow-2xl max-w-md w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="py-16 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">⭐ 注目のカテゴリ</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Categories will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold"> 最新商品</h2>
+                <div class="flex space-x-2">
+                    <button class="filter-btn px-4 py-2 rounded-lg bg-primary text-white" data-filter="all">全て</button>
+                    <button
+                        class="filter-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
+                        data-filter="men">男性</button>
+                    <button
+                        class="filter-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
+                        data-filter="women">女性</button>
+                    <button
+                        class="filter-btn px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
+                        data-filter="accessories">アクセサリ</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Products will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="私たちについて" class="rounded-lg shadow-lg w-full h-auto object-cover">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6">LuxSecond</h2>
+                    <p class="mb-4 text-lg">LuxSecondは、ブランドファッションを愛しつつ、コストを抑えたい方々に信頼されるセカンドハンド（中古）ショップです。
+                        当店では、90～95％の状態を保つ高級ブランドの中古アイテムを専門に取り扱っています</p>
+                    <p class="mb-4 text-lg">すべての商品はお届け前に、丁寧な品質検査と専門的な洗浄を経ております。</p>
+                    <div class="mt-8 grid grid-cols-2 gap-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
+                            <span>品質保証 </span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
+                            <span>手頃な価格</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
+                            <span>専門的なクリーニング</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-2"></i>
+                            <span> 7日間の保証</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">お客様の声</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonials will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12"> お問い合わせ</h2>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8">
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block mb-2 font-medium"> 氏名</label>
+                                <input type="text" id="name"
+                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary dark:bg-gray-800">
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 font-medium">Email</label>
+                                <input type="email" id="email"
+                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary dark:bg-gray-800">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block mb-2 font-medium">テーマ </label>
+                            <input type="text" id="subject"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary dark:bg-gray-800">
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-2 font-medium">内容</label>
+                            <textarea id="message" rows="4"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary dark:bg-gray-800"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-opacity-90 transition">メッセージを送る</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">LuxSecond</h3>
+                    <p class="mb-4">住所 : 〒760-0011 香川県高松市浜ノ町 １−２０</p>
+                    <p class="mb-4">Email: info@luxsecond.com</p>
+                    <p>電話番号: 0901 234 567</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">目録</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary transition">男性</a></li>
+                        <li><a href="#" class="hover:text-primary transition">女性</a></li>
+                        <li><a href="#" class="hover:text-primary transition"> アクセサリー </a></li>
+                        <li><a href="#" class="hover:text-primary transition">値下げ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">情報</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary transition">私たちについて</a></li>
+                        <li><a href="#" class="hover:text-primary transition">プライバシーポリシー</a></li>
+                        <li><a href="#" class="hover:text-primary transition"> ご利用規約</a></li>
+                        <li><a href="#" class="hover:text-primary transition">よくあるお問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">私たちをフォローする</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="https://www.facebook.com"
+                            class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com"
+                            class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com"
+                            class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.tiktok.com"
+                            class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                    <p>ニュースレターを購読する:</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="あなたのメール"
+                            class="px-4 py-2 rounded-l-lg bg-gray-700 text-white w-full focus:outline-none">
+                        <button class="bg-primary px-4 py-2 rounded-r-lg hover:bg-opacity-90 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2023 LuxSecond. すべての権利を保留します。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar"
+        class="fixed top-0 right-0 w-full md:w-96 h-full bg-white dark:bg-gray-800 shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+        <div class="p-6 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">お買い物カゴ</h3>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex-grow overflow-y-auto mb-4">
+                <!-- Cart items will be generated by JavaScript -->
+                <div id="cart-items" class="space-y-4">
+                    <!-- Cart items will be added here -->
+                </div>
+            </div>
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                <div class="flex justify-between mb-4">
+                    <span>小計 </span>
+                    <span id="cart-total" class="font-bold">0円</span>
+                </div>
+                <a href="#"
+                    class="block w-full bg-primary text-white py-3 rounded-lg text-center font-medium hover:bg-opacity-90 transition"
+                    id="checkout-btn">決済ページへリダイレクト</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Data arrays
+        const categories = [
+            { id: 1, name: "コート", icon: "fa-coat", count: 42 },
+            { id: 2, name: "バッグ", icon: "fa-bag-shopping", count: 28 },
+            { id: 3, name: "靴", icon: "fa-shoe-prints", count: 35 },
+            { id: 4, name: "時計", icon: "fa-clock", count: 18 }
+        ];  
+
+              const products = [
+            { id: 1, link:"./bbr.html", name: "バーバリーのコート", price: 45000, originalPrice: 800000, category: "men", image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80", condition: "90% 新し", rating: 4.5 },
+
+            { id: 2, link:"./httt.html", name: " Gucci バッグ", price: 650000, originalPrice: 1220000, category: "women", image: "https://media.gucci.com/style/DarkGray_Center_0_0_2400x2400/1582047004/602204_92TCG_8563_001_074_0000_Light--1955.jpg", condition: "95% 新し", rating: 4.8 },
+            { id: 3, link:"./nike.html", name: " nike靴", price: 180000, originalPrice: 350000, category: "men", image: "https://luxuo.vn/wp-content/uploads/2020/10/20201007-Shoes-5.jpg", condition: "85% 新し", rating: 4.2 },
+            { id: 4, link:"./dior.html", name: "ディオールのワンピース", price: 550000, originalPrice: 900000, category: "women", image: "https://img.komehyo.jp/contents/images/goods/afb/2410035339118_1_b.jpg", condition: "92% 新し", rating: 4.7 },
+            { id: 5, link:"./a.html", name: "ロレックスの時計", price: 122000000, originalPrice: 250000000, category: "accessories", image: "https://shop.r10s.jp/ippuukishi/cabinet/item20230908/ik-00-0529048-0_wm.jpg", condition: "88% 新し", rating: 4.9 },
+            { id: 6, link:"./ao.html", name: "ラルフローレンのシャツ", price: 120000, originalPrice: 250000, category: "men", image: "https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI790964253001_alternate10?$rl_4x5_zoom$", condition: "90% 新し", rating: 4.3 },
+            { id: 7, link:"./vi.html", name: "ルイ・ヴィトンのレザー財布", price: 380000, originalPrice: 700000, category: "accessories", image: "https://brand-yukichi.jp/cdn/shop/files/S__4776018_0.jpg?v=1738048626&width=800", condition: "93% 新し", rating: 4.6 },
+            { id: 8, link:"./giay1.html", name: "ジミー・チュウのハイヒール", price: 320000, originalPrice: 60000, category: "women", image: "https://media.jimmychoo.com/image/upload/q_auto:best,f_auto,dpr_2.0,w_900,h_900,c_fit/JPPROD_PRODUCT/images/original/AVRILSXU_001721_SIDE_vg507.jpg", condition: "87% 新し", rating: 4.4 }
+        ];
+        
+
+        const testimonials = [
+            { id: 1, name: "山本さん", role: "得意先 ", content: "LuxSecondで購入したコートの品質に非常に満足しています。新品同様で、価格は半額以下でした。", avatar: "https://randomuser.me/api/portraits/women/44.jpg", rating: 5 },
+            { id: 2, name: "ミンさん", role: "新規のお客様", content: "アドバイザーサービスは非常に良く、スタッフは親切でした。製品は説明通りで、また利用したいと思います。.", avatar: "https://randomuser.me/api/portraits/men/32.jpg", rating: 4 },
+            { id: 3, name: "福田さん", role: "ファッションデザイナ", content: "業界関係者として、ここでの製品の品質を高く評価しています。投資する価値が十分にあります。.", avatar: "https://randomuser.me/api/portraits/women/68.jpg", rating: 5 }
+        ];
+
+        // Shopping cart
+        let cart = [];
+
+        // DOM elements
+        const themeToggle = document.getElementById('theme-toggle');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCart = document.getElementById('close-cart');
+        const cartLink = document.getElementById('cart-link');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productContainer = document.querySelector('#products .grid');
+        const categoryContainer = document.querySelector('.grid-cols-2.md\\:grid-cols-4');
+        const testimonialContainer = document.querySelector('#testimonials .grid');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const contactForm = document.getElementById('contact-form');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const logoLink = document.getElementById('logo-link');
+        const shopNowBtn = document.getElementById('shop-now');
+        const learnMoreBtn = document.getElementById('learn-more');
+        const checkoutBtn = document.getElementById('checkout-btn');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            // Generate categories
+            generateCategories();
+
+            // Generate products
+            generateProducts('all');
+
+            // Generate testimonials
+            generateTestimonials();
+
+            // Set up event listeners
+            setupEventListeners();
+
+            // Check for saved theme preference
+            checkThemePreference();
+        });
+
+        // Generate categories
+        function generateCategories() {
+            categoryContainer.innerHTML = categories.map(category => `
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-6 text-center hover:shadow-lg transition cursor-pointer">
+                    <i class="fas ${category.icon} text-4xl text-primary mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">${category.name}</h3>
+                    <p class="text-gray-500 dark:text-gray-400">${category.count} 製品</p>
+                </div>
+            `).join('');
+        }
+
+        // Generate products
+        function generateProducts(filter) {
+            let filteredProducts = products;
+
+            if (filter !== 'all') {
+                filteredProducts = products.filter(product => product.category === filter);
+            }
+
+           productContainer.innerHTML = filteredProducts.map(product => `
+            <a href="/${product.link}" class="block">
+                <div class="product-card bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden">
+                    <div class="relative">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover">
+                    <div class="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-1 rounded">
+                        -${Math.round((1 - product.price / product.originalPrice) * 100)}%
+                    </div>
+                    </div>
+                    <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1">${product.name}</h3>
+                    <div class="flex items-center mb-2">
+                        ${generateRatingStars(product.rating)}
+                        <span class="text-gray-500 text-sm ml-2">${product.condition}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                        <span class="text-primary font-bold text-lg">${formatPrice(product.price)}</span>
+                        <span class="text-gray-400 line-through text-sm ml-2">${formatPrice(product.originalPrice)}</span>
+                        </div>
+                        <button class="add-to-cart bg-gray-200 dark:bg-gray-600 hover:bg-primary hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition" data-id="${product.id}">
+                        <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </a>
+            `).join('');
+            // Add event listeners to add-to-cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function () {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+        }
+
+        // Generate rating stars
+        function generateRatingStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fas fa-star text-yellow-400"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+                } else {
+                    stars += '<i class="far fa-star text-yellow-400"></i>';
+                }
+            }
+
+            return stars;
+        }
+
+        // Generate testimonials
+        function generateTestimonials() {
+            testimonialContainer.innerHTML = testimonials.map(testimonial => `
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="${testimonial.avatar}" alt="${testimonial.name}" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">${testimonial.name}</h4>
+                            <p class="text-gray-500 text-sm">${testimonial.role}</p>
+                        </div>
+                    </div>
+                    <p class="mb-4">"${testimonial.content}"</p>
+                    <div class="flex">
+                        ${generateRatingStars(testimonial.rating)}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Format price
+        function formatPrice(price) {
+            return new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(price);
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+
+            if (product) {
+                const existingItem = cart.find(item => item.id === productId);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+
+                updateCart();
+                showNotification('お買い物カゴに商品を追加しました');
+            }
+        }
+
+        // Update cart
+        function updateCart() {
+            // Update cart items
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div class="flex items-center border-b border-gray-200 dark:border-gray-700 pb-4">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded mr-4">
+                    <div class="flex-grow">
+                        <h4 class="font-medium">${item.name}</h4>
+                        <p class="text-primary font-medium">${formatPrice(item.price)}</p>
+                    </div>
+                    <div class="flex items-center">
+                        <button class="quantity-btn px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded" data-id="${item.id}" data-action="decrease">-</button>
+                        <span class="mx-2">${item.quantity}</span>
+                        <button class="quantity-btn px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded" data-id="${item.id}" data-action="increase">+</button>
+                        <button class="remove-btn ml-4 text-red-500" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update cart total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = formatPrice(total);
+
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    const action = this.getAttribute('data-action');
+                    updateCartItemQuantity(productId, action);
+                });
+            });
+
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    removeFromCart(productId);
+                });
+            });
+        }
+
+        // Update cart item quantity
+        function updateCartItemQuantity(productId, action) {
+            const item = cart.find(item => item.id === productId);
+
+            if (item) {
+                if (action === 'increase') {
+                    item.quantity += 1;
+                } else if (action === 'decrease' && item.quantity > 1) {
+                    item.quantity -= 1;
+                }
+
+                updateCart();
+            }
+        }
+
+        // Remove from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+            showNotification('ご注文商品をカートより削除いたしました');
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle mr-2"></i>
+                <span>${message}</span>
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Check theme preference
+        function checkThemePreference() {
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Toggle cart sidebar
+        function toggleCartSidebar() {
+            cartSidebar.classList.toggle('translate-x-full');
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
+            }
+        }
+
+        // Handle contact form submission
+        function handleContactFormSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && subject && message) {
+                // Here you would typically send the form data to a server
+                showNotification('お問い合わせいただき、誠にありがとうございます。できるだけ早急にご返信申し上げます');
+                contactForm.reset();
+            } else {
+                showNotification('すべての必要事項をご記入ください。');
+            }
+        }
+
+        // Handle checkout
+        function handleCheckout(e) {
+            e.preventDefault();
+
+            if (cart.length > 0) {
+                showNotification('お支払いページに移動しています');
+                // Here you would typically redirect to a checkout page
+            } else {
+                showNotification('お客様のカートには現在商品がありません');
+            }
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Theme toggle
+            themeToggle.addEventListener('click', toggleTheme);
+
+            // Mobile menu toggle
+            menuToggle.addEventListener('click', toggleMobileMenu);
+
+            // Cart toggle
+            cartLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                toggleCartSidebar();
+            });
+
+            // Close cart
+            closeCart.addEventListener('click', toggleCartSidebar);
+
+            // Filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'hover:bg-gray-300', 'dark:hover:bg-gray-600');
+                    });
+
+                    // Add active class to clicked button
+                    this.classList.add('bg-primary', 'text-white');
+                    this.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'hover:bg-gray-300', 'dark:hover:bg-gray-600');
+
+                    // Filter products
+                    const filter = this.getAttribute('data-filter');
+                    generateProducts(filter);
+                });
+            });
+
+            // Navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', scrollToSection);
+            });
+
+            // Logo link
+            logoLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Shop now button
+            shopNowBtn.addEventListener('click', scrollToSection);
+
+            // Learn more button
+            learnMoreBtn.addEventListener('click', scrollToSection);
+
+            // Contact form
+            contactForm.addEventListener('submit', handleContactFormSubmit);
+
+            // Checkout button
+            checkoutBtn.addEventListener('click', handleCheckout);
+        }
+    </script>
+</body>
+
+</html>
